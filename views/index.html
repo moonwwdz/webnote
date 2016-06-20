@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>网页笔记|website notebook</title>
+    <link rel="stylesheet" href="static/css/main.css">
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 
@@ -18,7 +19,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top col-md-12 col-sm-12 col-xs-12">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -57,11 +58,16 @@
                     <button type="submit" class="btn btn-default">Search</button>
                 </form>
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-default  navbar-btn" data-toggle="modal" data-target="#myModal">
-  Add New Note
-</button>
+                <button type="button" class="btn btn-default  navbar-btn" data-toggle="modal" data-target="#addNoteModal">Add New Note</button>
+                <!--登录注册-->
+                <ul class="nav navbar-nav navbar-right hidden">
+                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#SignupModal">SignUp</a></li>
+                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#loginModal">LogIn</a></li>
+                </ul>
+                <!--登录注册-->
+                <!--个人信息-->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Wangc</a></li>
+                    <li><a href="#"><img src="http://7xi4ih.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png" alt="..." class="img-circle img-responsive" width="25px"></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">xxxxxxxx <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -72,6 +78,7 @@
                             <li><a href="#">Logout</a></li>
                         </ul>
                     </li>
+                <!--个人信息-->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -81,8 +88,8 @@
 
 
     <!--模态框-->
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <!-- Add Note -->
+    <div class="modal fade" id="addNoteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -98,13 +105,75 @@
                         <div class="form-group">
                             <label for="">Note Contents</label>
                             <textarea class="form-control" rows="15"></textarea>
+                        </div>                        
+                        <button type="submit" class="btn btn-default btn-block">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Login -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModalLabel">Note Form</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="userEmail">Email</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="Your Email">
                         </div>
-                        <div class="checkbox">
-                            <label>
-      <input type="checkbox"> Check me out
-    </label>
+                        <div class="form-group">
+                            <label for="signPassword">Password</label>
+                            <input type="password" class="form-control" id="signPassword" placeholder="Password">
+                        </div>                        
+                        <button type="submit" class="btn btn-default btn-block">Login</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- signup -->
+    <div class="modal fade" id="SignupModal" tabindex="-1" role="dialog" aria-labelledby="SignupLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="SignupLabel">SignUp Form</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="email" class="form-control" id="" placeholder="Your Email">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <div class="form-group">
+                            <label for="userName">Name</label>
+                            <input type="text" class="form-control" id="userName" placeholder="Your Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="signPassword">Password</label>
+                            <input type="password" class="form-control" id="signPassword" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="inviteCode">inviteCode</label>
+                            <input type="text" class="form-control" id="inviteCode" placeholder="Your Invite Code">
+                            <p class="help-block">You can ask for me !!!</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="Photograph">Photograph</label>
+                            <input type="file" id="Photograph">
+                        </div>                       
+                        <button type="submit" class="btn btn-default btn-block">SignUp</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -118,7 +187,7 @@
     <!--主页面-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title<span class="badge">14</span></div>
                     <div class="panel-body">
@@ -132,7 +201,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title</div>
                     <div class="panel-body">
@@ -146,7 +215,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-sx-12">
+            <div class="col-md-4 col-sm-12 col-sx-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title</div>
                     <div class="panel-body">
@@ -160,7 +229,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-sx-12">
+            <div class="col-md-4 col-sm-12 col-sx-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title</div>
                     <div class="panel-body">
@@ -174,7 +243,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-sx-12">
+            <div class="col-md-4 col-sm-12 col-sx-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title</div>
                     <div class="panel-body">
@@ -189,7 +258,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-sx-12">
+            <div class="col-md-4 col-sm-12 col-sx-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title<span class="badge">14</span></div>
                     <div class="panel-body">
@@ -203,7 +272,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-sx-12">
+            <div class="col-md-4 col-sm-12 col-sx-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">Panel heading without title</div>
                     <div class="panel-body">

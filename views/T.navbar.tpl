@@ -103,7 +103,7 @@
                     <h4 class="modal-title" id="loginModalLabel">Note Form</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/user">
+                    <form method="POST" action="/login">
                         <div class="form-group">
                             <label for="userEmail">Email</label>
                             <input type="email" class="form-control" id="userEmail" placeholder="Your Email" name="uemail">
@@ -130,22 +130,23 @@
                     <h4 class="modal-title" id="SignupLabel">SignUp Form</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/signup" method="POST">
+                    <input type="hidden" value="put" name="_method">
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="email" class="form-control" id="" placeholder="Your Email">
+                            <input type="email" class="form-control" id="" placeholder="Your Email" name="semail">
                         </div>
                         <div class="form-group">
                             <label for="userName">Name</label>
-                            <input type="text" class="form-control" id="userName" placeholder="Your Name">
+                            <input type="text" class="form-control" id="userName" placeholder="Your Name" name="sname">
                         </div>
                         <div class="form-group">
                             <label for="signPassword">Password</label>
-                            <input type="password" class="form-control" id="signPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="signPassword" placeholder="Password" name="spasswd">
                         </div>
                         <div class="form-group">
                             <label for="inviteCode">inviteCode</label>
-                            <input type="text" class="form-control" id="inviteCode" placeholder="Your Invite Code">
+                            <input type="text" class="form-control" id="inviteCode" placeholder="Your Invite Code" name="invitecode">
                             <p class="help-block">You can ask for me !!!</p>
                         </div>
                         <div class="form-group">

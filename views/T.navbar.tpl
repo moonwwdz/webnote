@@ -106,11 +106,11 @@
                     <form method="POST" action="/user">
                         <div class="form-group">
                             <label for="userEmail">Email</label>
-                            <input type="email" class="form-control" id="userEmail" placeholder="Your Email">
+                            <input type="email" class="form-control" id="userEmail" placeholder="Your Email" name="uemail">
                         </div>
                         <div class="form-group">
                             <label for="signPassword">Password</label>
-                            <input type="password" class="form-control" id="signPassword" placeholder="Password">
+                            <input type="password" class="form-control" id="signPassword" placeholder="Password" name="upasswd">
                         </div>                        
                         <button type="submit" class="btn btn-default btn-block">Login</button>
                     </form>

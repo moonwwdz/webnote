@@ -14,10 +14,16 @@ type UserController struct {
 
 func init() {
 	orm.RegisterDriver("mysql", orm.DRMySQL)
-	orm.RegisterDataBase("default", "mysql", "root:123456@/beego?charset=utf8")
+	mysqlU := beego.AppConfig.String("mysqlname")
+	mysqlP := beego.AppConfig.String("mysqlpwd")
+	mysqlDB := beego.AppConfig.String("dbname")
+	handle := mysqlU + ":" + mysqlP + "@/" + mysqlDB + "?charset=utf8"
+	orm.RegisterDataBase("default", "mysql", handle)
 	orm.RunSyncdb("default", false, true)
 }
 
 func (this *UserController) Post() {
-
+	email := this.GetString("uemail")
+	this.Ctx.SetCookie("ThisKad", email, "/")
+	this.Ctx.Redirect(302, "/")
 }

@@ -18,14 +18,11 @@ func init() {
 func AddUser(u string, p string, c string) (id int64, err error) {
 	o := orm.NewOrm()
 	pro := Profile{Invitecode: c}
-	pe := o.Read(&pro)
+	pe := o.Read(&pro, "Invitecode")
 	if pe != nil {
 		return 0, pe
 	}
 	user := User{Name: u, Passwd: p, Profile: &pro}
 	id, ue := o.Insert(&user)
-	if ue != nil {
-		return 0, ue
-	}
-	return id, nil
+	return id, ue
 }

@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	m "webnote/models"
 
 	"github.com/astaxie/beego"
@@ -9,12 +8,6 @@ import (
 
 type UserController struct {
 	beego.Controller
-}
-
-func (this *UserController) Login() {
-	email := this.GetString("uemail")
-	this.Ctx.SetCookie("ThisKad", email, "/")
-	this.Ctx.Redirect(302, "/")
 }
 
 func (this *UserController) SignUp() {
@@ -28,8 +21,7 @@ func (this *UserController) SignUp() {
 		return
 	}
 	if _, err := m.AddUser(email, pwd, invcode); err != nil {
-		fmt.Println(err)
-		this.Ctx.SetCookie("warning", "xxxxx")
+		this.Ctx.Output.JSON(err, true, true)
 	}
 	this.Ctx.Redirect(302, "/")
 }

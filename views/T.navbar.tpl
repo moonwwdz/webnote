@@ -54,7 +54,7 @@
                             <li><a href="#">Notes</a></li>
                             <li><a href="#">Setting</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#">Logout</a></li>
+                            <li><a href="/admin">Logout</a></li>
                         </ul>
                     </li>
                 <!--个人信息-->
@@ -103,7 +103,7 @@
                     <h4 class="modal-title" id="loginModalLabel">Note Form</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/login">
+                    <form method="POST" action="/admin">
                         <div class="form-group">
                             <label for="userEmail">Email</label>
                             <input type="email" class="form-control" id="userEmail" placeholder="Your Email" name="uemail">

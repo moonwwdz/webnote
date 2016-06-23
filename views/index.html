@@ -7,6 +7,12 @@
     
     {{template "t_navbar" .}}
 
+    {{if .isError}}
+    <div class="alert alert-warning alert-dismissible center-block" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong class="text-center">Warning!</strong> {{.error}}
+</div>   
+    {{end}}
     <!--主页面-->
     <div class="container-fluid">
         <div class="row">

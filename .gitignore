@@ -1,3 +1,4 @@
 tests/*
 *.exe
 *.exe~
+static/*

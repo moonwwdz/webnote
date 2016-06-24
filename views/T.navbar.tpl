@@ -16,7 +16,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">List <span class="sr-only">(current)</span></a></li>
+                    <li class=""><a href="#">List <span class="sr-only">(current)</span></a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Category <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -46,9 +46,9 @@
                 <!--登录注册-->
                 <!--个人信息-->
                 <ul class="nav navbar-nav navbar-right {{if .isLogin}}{{else}}hidden{{end}}">
-                    <li><a href="#"><img src="http://7xi4ih.com1.z0.glb.clouddn.com/%E5%A4%B4%E5%83%8F.png" alt="..." class="img-circle img-responsive" width="25px"></a></li>
+                    <li><a href="#"><img src="/static/upload/{{.info.Photo}}" alt="..." class="img-circle img-responsive" width="25px"></a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">xxxxxxxx <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{.info.Name}} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#">Info</a></li>
                             <li><a href="#">Notes</a></li>
@@ -130,7 +130,7 @@
                     <h4 class="modal-title" id="SignupLabel">SignUp Form</h4>
                 </div>
                 <div class="modal-body">
-                    <form action="/signup" method="POST">
+                    <form action="/signup" method="POST" enctype="multipart/form-data">
                     <input type="hidden" value="put" name="_method">
                         <div class="form-group">
                             <label for="">Email</label>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group">
                             <label for="Photograph">Photograph</label>
-                            <input type="file" id="Photograph">
+                            <input type="file" id="Photograph" name="photograph">
                         </div>                       
                         <button type="submit" class="btn btn-default btn-block">SignUp</button>
                     </form>

@@ -30,9 +30,26 @@ func (this *UserController) SignUp() {
 		flash.Error("Code不能用！")
 	}
 
-	if _, err := m.AddUser(&u, invcode); err != nil {
-		flash.Error("数据库错误！换个邮箱试试。")
+	f, h, ferr := this.GetFile("photograph")
+	defer f.Close()
+	if ferr != nil {
+		flash.Error("图片上传错误！")
+	} else {
+		ferr = this.SaveToFile("photograph", "F:/go_pro/src/webnote/static/upload/"+h.Filename)
+		if ferr != nil {
+			flash.Error("图片保存路径不存在！")
+		} else {
+			u.Photo = h.Filename
+		}
 	}
+
+	if _, err := m.AddUser(&u, invcode); err != nil {
+		beego.Debug(err)
+		flash.Error("数据库错误！换个邮箱试试。")
+	} else {
+		this.SetSession("userInfo", m.GetUserByEmail(u.Email))
+	}
+
 	flash.Store(&this.Controller)
 	this.Ctx.Redirect(302, "/")
 }

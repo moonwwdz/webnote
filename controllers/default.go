@@ -17,6 +17,7 @@ func (c *MainController) Get() {
 
 	if session := c.GetSession("userInfo"); session != nil {
 		c.Data["isLogin"] = true
+		c.Data["info"] = session
 	}
 	c.TplName = "index.html"
 }

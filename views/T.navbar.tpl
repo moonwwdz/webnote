@@ -76,14 +76,18 @@
                     <h4 class="modal-title" id="myModalLabel">Note Form</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="/note" method="POST">
+                        <div class="form-group">
+                            <label for="">Note Title</label>
+                            <input type="text" class="form-control" id="ntitle" name="ntitle" placeholder="Title">
+                        </div>
                         <div class="form-group">
                             <label for="">Note Category</label>
-                            <input type="email" class="form-control" id="" placeholder="category">
+                            <input type="text" class="form-control" id="ntag" name="ntag" placeholder="category">
                         </div>
                         <div class="form-group">
                             <label for="">Note Contents</label>
-                            <textarea class="form-control" rows="15"></textarea>
+                            <textarea class="form-control" rows="15" id="ncontent" name="ncontent" placeholder="Input you want"></textarea>
                         </div>                        
                         <button type="submit" class="btn btn-default btn-block">Submit</button>
                     </form>

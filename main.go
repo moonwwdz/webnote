@@ -15,7 +15,7 @@ func init() {
 	mysqlDB := beego.AppConfig.String("dbname")
 	handle := mysqlU + ":" + mysqlP + "@/" + mysqlDB + "?charset=utf8"
 	orm.RegisterDataBase("default", "mysql", handle)
-	orm.RunSyncdb("default", true, true)
+	orm.RunSyncdb("default", false, true)
 }
 
 func main() {

@@ -20,5 +20,10 @@ func CheckCode(code string) bool {
 	if err == orm.ErrNoRows {
 		return false
 	}
+	user := User{Profile: &obj}
+	err = o.Read(&user, "Profile")
+	if user.Id > 0 {
+		return false
+	}
 	return true
 }

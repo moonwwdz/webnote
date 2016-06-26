@@ -14,7 +14,7 @@ type Notebook struct {
 	User       *User     `orm:"rel(fk)"`
 	Tag        []*Tag    `orm:"rel(m2m)"`
 	CreateTime time.Time `orm:"auto_now_add;type(datetime)"`
-	UpdateTime time.Time `orm:"auto_now;type(datetime)`
+	UpdateTime time.Time `orm:"auto_now;type(datetime)"`
 }
 
 func init() {
@@ -25,10 +25,12 @@ func init() {
 //添加一条笔记
 func AddNote(note *Notebook, tags *[]string) bool {
 	var tagObjs []*Tag
-	tagObj := Tag{}
 	o := orm.NewOrm()
+	beego.Debug(tags)
 	for _, tag := range *tags {
+		tagObj := Tag{}
 		tagObj.Tag = tag
+		tagObj.Notebook = []*Notebook{note}
 		if _ = o.Read(&tagObj); tagObj.Id != 0 {
 			tagObjs = append(tagObjs, &tagObj)
 		} else {
@@ -39,10 +41,20 @@ func AddNote(note *Notebook, tags *[]string) bool {
 				beego.Debug(err)
 			}
 		}
+		beego.Debug(tagObj)
 	}
+	note.UpdateTime = time.Time{}
+	beego.Debug(tagObjs)
+	note.Tag = tagObjs
+	beego.Debug(*note)
 	if _, nerr := o.Insert(note); nerr != nil {
 		beego.Debug(nerr)
 		return false
+	}
+	for _, tag := range tagObjs {
+		if _, err := o.QueryM2M(note, "Tag").Add(tag); err != nil {
+			beego.Debug(err)
+		}
 	}
 	return true
 }

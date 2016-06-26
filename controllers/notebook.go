@@ -20,13 +20,16 @@ func (c *NoteController) NewNote() {
 		c.Ctx.Redirect(302, "/")
 	}
 
-	note := models.Notebook{User: models.User(session)}
+	note := models.Notebook{}
 	if nerr := c.ParseForm(&note); nerr != nil {
 
 	}
-	titles := c.GetString("ntitle")
-	titleList := strings.Split(titles, ",")
-	if !models.AddNote(&note, &titleList) {
+	if s, ok := session.(models.User); ok {
+		note.User = &s
+	}
+	tags := c.GetString("ntag")
+	tagList := strings.Split(tags, ",")
+	if !models.AddNote(&note, &tagList) {
 		flash.Error("添加失败！")
 		flash.Store(&c.Controller)
 	}

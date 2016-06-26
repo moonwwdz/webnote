@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"webnote/models"
+
 	"github.com/astaxie/beego"
 )
 
@@ -19,5 +21,6 @@ func (c *MainController) Get() {
 		c.Data["isLogin"] = true
 		c.Data["info"] = session
 	}
+	beego.Debug(models.AllList())
 	c.TplName = "index.html"
 }

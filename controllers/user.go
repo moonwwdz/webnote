@@ -35,7 +35,7 @@ func (this *UserController) SignUp() {
 	if ferr != nil {
 		flash.Error("图片上传错误！")
 	} else {
-		ferr = this.SaveToFile("photograph", "/home/Application/src/webnote/static/upload/"+h.Filename)
+		ferr = this.SaveToFile("photograph", "F:/go_pro/src/webnote/static/upload/"+h.Filename)
 		if ferr != nil {
 			flash.Error("图片保存路径不存在！")
 		} else {

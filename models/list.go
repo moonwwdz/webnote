@@ -17,7 +17,7 @@ type Note struct {
 	Notename string
 }
 
-func AllList() int {
+func AllList()[]orm.ParamsList {
 	var lists []orm.ParamsList
 	o := orm.NewOrm()
 	num, err := o.Raw("select tag.id,tag.tag,count(notebook_tags.notebook_id) as ctn from notebook_tags left join tag on notebook_tags.tag_id = tag.id group by notebook_tags.tag_id ").ValuesList(&lists)
@@ -30,5 +30,5 @@ func AllList() int {
 		}
 	}
 	beego.Debug(lists)
-	return 1
+	return lists
 }

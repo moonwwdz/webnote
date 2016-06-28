@@ -4,7 +4,7 @@ import "github.com/astaxie/beego/orm"
 
 type Tag struct {
 	Id       int
-	Tag      string      `valid:"Required" orm:"unique"`
+	Tag      string      `valid:"Required"`
 	Notebook []*Notebook `orm:"reverse(many)"`
 }
 

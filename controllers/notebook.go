@@ -18,6 +18,7 @@ func (c *NoteController) NewNote() {
 		flash.Error("请先登录！")
 		flash.Store(&c.Controller)
 		c.Ctx.Redirect(302, "/")
+		return
 	}
 
 	note := models.Notebook{}

@@ -31,7 +31,8 @@ func AddNote(note *Notebook, tags *[]string) bool {
 		tagObj := Tag{}
 		tagObj.Tag = tag
 		tagObj.Notebook = []*Notebook{note}
-		if _ = o.Read(&tagObj); tagObj.Id != 0 {
+		if err := o.QueryTable("tag").Filter("Tag", tag).One(&tagObj); tagObj.Id != 0 {
+			beego.Debug(err)
 			tagObjs = append(tagObjs, &tagObj)
 		} else {
 			_, err := o.Insert(&tagObj)
@@ -44,9 +45,7 @@ func AddNote(note *Notebook, tags *[]string) bool {
 		beego.Debug(tagObj)
 	}
 	note.UpdateTime = time.Time{}
-	beego.Debug(tagObjs)
 	note.Tag = tagObjs
-	beego.Debug(*note)
 	if _, nerr := o.Insert(note); nerr != nil {
 		beego.Debug(nerr)
 		return false

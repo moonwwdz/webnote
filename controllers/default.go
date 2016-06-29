@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"webnote/models"
-	"fmt"
+
 	"github.com/astaxie/beego"
 )
 

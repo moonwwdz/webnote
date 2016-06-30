@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"strconv"
 	"strings"
 	"webnote/models"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
 )
 
 type NoteController struct {
@@ -38,5 +40,16 @@ func (c *NoteController) NewNote() {
 }
 
 func (c *NoteController) GetNote() {
-	c.Ctx.Redirect(302, "/")
+	a := c.Ctx.Input.Params()
+	intid, err := strconv.Atoi(a[":id"])
+	if err != nil {
+		beego.Debug(err)
+	}
+	note := new(models.Notebook)
+	err = orm.NewOrm().QueryTable("notebook").Filter("id", intid).One(note)
+	if err != nil {
+		beego.Debug(err)
+	}
+	c.Data["note"] = note
+	c.TplName = "note.html"
 }

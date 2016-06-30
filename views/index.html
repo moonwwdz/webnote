@@ -23,7 +23,7 @@
                     <div class="panel-body">
                         <ul class="list-group">
                             {{range .Notebook}}
-                            <li class="list-group-item"><a href="/note/{{.Id}}">{{.Title}}</a></li>
+                            <li class="list-group-item"><a href="#shownote" onclick="getNote('/note/{{.Id}}')">{{.Title}}</a></li>
                             {{end}}
                         </ul>
                     </div>
@@ -34,5 +34,16 @@
     </div>
     <!--主页面-->
 </body>
+<script>
+    function getNote(url) {
+        $.ajax({
+            url:url,
+            success:function(html){
+                $("#shownote").find(".modal-content").html(html)
+                $("#shownote").modal({'show':true})
+            }
+        })  
+    }
+</script>
 
 </html>

@@ -166,5 +166,14 @@
             </div>
         </div>
     </div>
+
+    <!--展示信息-->
+    <div class="modal fade" id="shownote" tabindex="-1" role="dialog" aria-labelledby="shownote">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                
+            </div>
+        </div>
+    </div>
     <!--模态框-->
 {{end}}

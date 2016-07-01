@@ -46,10 +46,15 @@ func (c *NoteController) GetNote() {
 		beego.Debug(err)
 	}
 	note := new(models.Notebook)
-	err = orm.NewOrm().QueryTable("notebook").Filter("id", intid).One(note)
+	err = orm.NewOrm().QueryTable("notebook").Filter("Id", intid).One(note)
 	if err != nil {
 		beego.Debug(err)
 	}
+	if session := c.GetSession("userInfo"); session != nil {
+		c.Data["isLogin"] = true
+		c.Data["info"] = session
+	}
+	beego.Debug(note.Tag)
 	c.Data["note"] = note
 	c.TplName = "note.html"
 }

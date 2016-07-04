@@ -45,11 +45,14 @@ func (c *NoteController) GetNote() {
 	if err != nil {
 		beego.Debug(err)
 	}
-	note := new(models.Notebook)
-	err = orm.NewOrm().QueryTable("notebook").Filter("Id", intid).One(note)
-	if err != nil {
-		beego.Debug(err)
-	}
+
+	//取note的数据
+	note := models.GetNote(intid)
+
+	//取关联的title
+	c.Data["title"] = models.GetNoteTags(note)
+
+	//是否登录
 	if session := c.GetSession("userInfo"); session != nil {
 		c.Data["isLogin"] = true
 		c.Data["info"] = session
@@ -57,4 +60,55 @@ func (c *NoteController) GetNote() {
 	beego.Debug(note.Tag)
 	c.Data["note"] = note
 	c.TplName = "note.html"
+}
+
+func (c *NoteController) ChangeNote() {
+	flash := beego.NewFlash()
+	session := c.GetSession("userInfo")
+	o := orm.NewOrm()
+	if session == nil {
+		flash.Error("请先登录！")
+		flash.Store(&c.Controller)
+		c.Ctx.Redirect(302, "/")
+		return
+	}
+
+	note_id := c.GetString("note_id")
+	beego.Debug(note_id)
+	intid, err := strconv.Atoi(note_id)
+	if err != nil {
+		beego.Debug(err)
+	}
+	note := models.Notebook{Id: intid}
+	if err := o.Read(&note); err != nil {
+		beego.Debug(err)
+		flash.Error("修改失败！")
+		flash.Store(&c.Controller)
+		c.Ctx.Redirect(302, "/")
+	}
+	if nerr := c.ParseForm(&note); nerr != nil {
+		beego.Debug(nerr)
+	}
+	if s, ok := session.(models.User); ok {
+		note.User = &s
+	}
+
+	o.Begin()
+	if !models.UpdateNote(&note) {
+		o.Rollback()
+		flash.Error("添加失败！")
+		flash.Store(&c.Controller)
+		c.Ctx.Redirect(302, "/")
+	}
+
+	tags := c.GetString("ntag")
+	tagList := strings.Split(tags, ",")
+	tagObjs := models.GetOrCreateTags(&tagList)
+	m2m := o.QueryM2M(&note, "Tag")
+	m2m.Clear()
+	for _, tag := range tagObjs {
+		m2m.Add(tag)
+	}
+	o.Commit()
+	c.Ctx.Redirect(302, "/")
 }

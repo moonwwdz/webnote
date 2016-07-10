@@ -6,7 +6,7 @@
 </div>
 <div class="modal-body">
 
-    <pre>{{.note.Content}}</pre>
+    <pre>{{.note.Content | md | str2html}}</pre>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> {{if .isLogin}}
@@ -47,7 +47,6 @@
 <script>
     $(function(){
         $("#show_change_note").click(function(){
-console.log($("#page_change"));
             $("#page_show").hide();
             $("#page_change").show();
          });

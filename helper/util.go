@@ -3,6 +3,8 @@ package helper
 import (
 	"crypto/md5"
 	"encoding/hex"
+
+	"github.com/russross/blackfriday"
 )
 
 func CreateHash(s string) string {
@@ -14,4 +16,9 @@ func CreateHash(s string) string {
 
 func HashPw(s string) string {
 	return CreateHash(s)
+}
+
+func Markdown(s string) string {
+	output := blackfriday.MarkdownCommon([]byte(s))
+	return string(output)
 }

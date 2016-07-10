@@ -3,6 +3,8 @@ package main
 import (
 	_ "webnote/routers"
 
+	"webnote/helper"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
@@ -20,5 +22,6 @@ func init() {
 
 func main() {
 	beego.SetStaticPath("/static", "static")
+	beego.AddFuncMap("md", helper.Markdown)
 	beego.Run()
 }

@@ -57,7 +57,6 @@ func (c *NoteController) GetNote() {
 		c.Data["isLogin"] = true
 		c.Data["info"] = session
 	}
-	beego.Debug(note.Tag)
 	c.Data["note"] = note
 	c.TplName = "note.html"
 }
@@ -74,7 +73,6 @@ func (c *NoteController) ChangeNote() {
 	}
 
 	note_id := c.GetString("note_id")
-	beego.Debug(note_id)
 	intid, err := strconv.Atoi(note_id)
 	if err != nil {
 		beego.Debug(err)

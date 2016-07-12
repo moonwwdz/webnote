@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"path/filepath"
 	m "webnote/models"
 
 	"github.com/astaxie/beego"
@@ -32,11 +33,17 @@ func (this *UserController) SignUp() {
 
 	f, h, ferr := this.GetFile("photograph")
 	defer f.Close()
+	savepath, serr := filepath.Abs("../webnote/static/upload/")
+	beego.Debug(savepath)
+	if serr != nil {
+		beego.Debug(serr)
+	}
 	if ferr != nil {
 		flash.Error("图片上传错误！")
 	} else {
-		ferr = this.SaveToFile("photograph", "F:/go_pro/src/webnote/static/upload/"+h.Filename)
+		ferr = this.SaveToFile("photograph", savepath+h.Filename)
 		if ferr != nil {
+			beego.Debug(ferr)
 			flash.Error("图片保存路径不存在！")
 		} else {
 			u.Photo = h.Filename

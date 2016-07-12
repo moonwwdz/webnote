@@ -1,6 +1,8 @@
 package models
 
 import (
+	"strings"
+
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 )
@@ -34,7 +36,7 @@ func GetOrCreateTags(tags *[]string) []*Tag {
 	o := orm.NewOrm()
 
 	for _, tag := range *tags {
-		tagObj := Tag{Tag: tag}
+		tagObj := Tag{Tag: strings.Trim(tag, " ")}
 		if err := o.QueryTable("tag").Filter("Tag__Tag__Tag", tag).One(&tagObj); err != nil {
 			beego.Debug(err)
 			if _, err := o.Insert(&tagObj); err != nil {
